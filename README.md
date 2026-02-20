@@ -241,8 +241,8 @@ eng-team-reporter --activate /path/to/license.json
 | Confluence publishing fails | Ensure API token has write access to target space |
 | Rate limiting | GitHub allows 5000 req/hr; run reports during off-peak hours |
 | JIRA refs not detected | Keys must be uppercase `PROJECT-123` format in PR title or body |
-| License expired | Contact vendor for renewal |
+| License expired | Contact info@zagware.com for renewal |
 
 ## License
 
-Copyright (c) 2026 Davy McAleer. All rights reserved.
+Copyright (c) 2026 Zagware. All rights reserved. For licensing inquiries, contact info@zagware.com.
