@@ -221,11 +221,11 @@ GITHUB_TEAM_MEMBERS=johndoe,janesmith
 
 Engineering Team Reporter requires a valid license.
 
-| License Type | Team Size | Duration |
-|-------------|-----------|----------|
-| **Trial** | Up to 10 | 30 days |
-| **Standard** | Up to 25 | 1 year |
-| **Enterprise** | Unlimited | 1 year |
+| License Type | Users | Duration |
+|-------------|-------|----------|
+| **Trial** | 1 | 30 days |
+| **Standard** | 1 | 12 months |
+| **Enterprise** | 10+ | 12 months |
 
 ```bash
 eng-team-reporter --activate /path/to/license.json
