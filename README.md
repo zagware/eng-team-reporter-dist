@@ -35,13 +35,14 @@ No Python or other dependencies required — the binary is fully self-contained.
 # 1. Activate your license
 eng-team-reporter --activate /path/to/license.json
 
-# 2. Create a .env file with your API credentials (see Configuration below)
+# 2. Run the interactive setup wizard
+eng-team-reporter --setup
 
 # 3. Generate your first report
 eng-team-reporter --period week
 
 # 4. Open the report
-open reports/weekly_report_*.html
+open ~/eng-team-reporter/weekly_report_*.html
 ```
 
 ## Features
@@ -82,6 +83,10 @@ Automatic cross-platform linking extracts JIRA issue keys from GitHub PR titles 
 ## Command Reference
 
 ```bash
+# Setup and configuration
+eng-team-reporter --setup                                    # Interactive setup wizard
+eng-team-reporter --activate /path/to/license.json           # Activate license
+
 # Report generation
 eng-team-reporter --period week                              # Last complete week
 eng-team-reporter --period week --week-number 2025-08        # Specific week
@@ -89,16 +94,13 @@ eng-team-reporter --period month                             # Last complete mon
 eng-team-reporter --period month --month 2025-01             # Specific month
 eng-team-reporter --period custom --start-date 2025-01-01 --end-date 2025-01-31
 
-# Output options
+# Output options (default: ~/eng-team-reporter)
 eng-team-reporter --period week --output-dir ./my_reports    # Custom output directory
 eng-team-reporter --period week --verbose                    # Verbose logging
 
 # Confluence publishing
 eng-team-reporter --period week --publish                    # Publish to default space
 eng-team-reporter --period week --publish --publish-space "TEAM"
-
-# License management
-eng-team-reporter --activate /path/to/license.json           # Activate license
 
 # Info
 eng-team-reporter --version                                  # Show version
@@ -107,7 +109,13 @@ eng-team-reporter --help                                     # Show all options
 
 ## Configuration
 
-Create a `.env` file in the directory where you run the tool.
+Run the interactive setup wizard for guided configuration with connection testing:
+
+```bash
+eng-team-reporter --setup
+```
+
+The wizard saves credentials to `~/.etr/config` with restrictive permissions (0600). You can also create a `.env` file in your working directory. Config precedence: **environment variables > `~/.etr/config` > `.env` in CWD**.
 
 ### Required
 
@@ -135,8 +143,10 @@ Create a `.env` file in the directory where you run the tool.
 
 ## Output Structure
 
+Reports are saved to `~/eng-team-reporter/` by default (override with `--output-dir`):
+
 ```
-reports/
+~/eng-team-reporter/
 ├── weekly_report_2025-W08.html           # Main team report
 ├── weekly_report_2025-W08/               # Detail reports
 │   ├── people/
@@ -169,15 +179,17 @@ reports/
 
 ## Automation
 
+Since config is stored in `~/.etr/config`, no `cd` to a working directory is needed:
+
 ```bash
 # Weekly report every Monday at 9am
-0 9 * * 1 cd /path/to/workdir && eng-team-reporter --period week
+0 9 * * 1 /usr/local/bin/eng-team-reporter --period week
 
 # Monthly report on the 1st of each month
-0 9 1 * * cd /path/to/workdir && eng-team-reporter --period month
+0 9 1 * * /usr/local/bin/eng-team-reporter --period month
 
 # Weekly report with Confluence publishing
-0 9 * * 1 cd /path/to/workdir && eng-team-reporter --period week --publish
+0 9 * * 1 /usr/local/bin/eng-team-reporter --period week --publish
 ```
 
 ## Best Practices
@@ -229,8 +241,10 @@ Engineering Team Reporter requires a valid license.
 
 ```bash
 eng-team-reporter --activate /path/to/license.json
-# License is stored at ~/.eng-team-reporter/license.json
+# License is stored at ~/.etr/license.json
 ```
+
+Contact info@zagware.com for purchasing or renewal. Visit [www.zagware.io](https://www.zagware.io) for more information.
 
 ## Troubleshooting
 
