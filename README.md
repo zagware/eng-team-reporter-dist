@@ -65,6 +65,14 @@ Automatic cross-platform linking extracts JIRA issue keys from GitHub PR titles 
 - **Individual detail reports** — per-person breakdown with all activity
 - **Repository detail reports** — per-repo analysis with code area classification (Frontend, Backend, Testing, DevOps, Documentation)
 
+### Ship/Show/Ask Analysis
+
+- **PR Process Classification** — classifies every PR as Ship, Show, or Ask using [Martin Fowler's framework](https://martinfowler.com/articles/ship-show-ask.html)
+- **Streamlining Suggestions** — identifies PRs that could use a lighter review process based on change size, author seniority, and PR patterns
+- **Per-Author & Per-Repo Breakdowns** — see each contributor's and repository's Ship/Show/Ask distribution
+- **Draft PR Recognition** — draft PRs are treated as healthy "Ask" signals seeking early feedback
+- **Optional Seniority Context** — provide team seniority levels to refine suggestions
+
 ### Smart Features
 
 - **JIRA Reference Detection** — automatically extracts JIRA issue keys from PR titles and descriptions
@@ -97,6 +105,11 @@ eng-team-reporter --period custom --start-date 2025-01-01 --end-date 2025-01-31
 # Output options (default: ~/eng-team-reporter)
 eng-team-reporter --period week --output-dir ./my_reports    # Custom output directory
 eng-team-reporter --period week --verbose                    # Verbose logging
+
+# Ship/Show/Ask PR process analysis
+eng-team-reporter --period month --ship-show-ask             # Analyze last month's PRs
+eng-team-reporter --period custom --start-date 2025-01-01 --end-date 2025-03-31 \
+  --ship-show-ask --seniority-map "dev1:junior,dev2:mid,dev3:senior"
 
 # Confluence publishing
 eng-team-reporter --period week --publish                    # Publish to default space
@@ -156,7 +169,8 @@ Reports are saved to `~/eng-team-reporter/` by default (override with `--output-
 │       ├── org_repo1.html
 │       └── org_repo2.html
 ├── monthly_report_2025-01.html
-└── custom_report_20250101_20250131.html
+├── custom_report_20250101_20250131.html
+└── ship_show_ask_20250101_20250331.html  # --ship-show-ask
 ```
 
 ## Report Contents
@@ -176,6 +190,17 @@ Reports are saved to `~/eng-team-reporter/` by default (override with `--output-
 - Code area breakdown: Frontend, Backend, Testing, DevOps, Documentation
 - Lines changed and files modified per area
 - PRs grouped by code area
+
+### Ship/Show/Ask Analysis Report (`--ship-show-ask`)
+- Framework explanation with Ship/Show/Ask definitions
+- Overview stats: classification distribution, merge times, streamlining opportunities
+- Current vs. suggested distribution bar charts
+- Per-author breakdown: classification mix, draft usage, reviews given, avg merge time
+- Per-repository breakdown with distribution bars
+- Streamlining opportunities table: PRs that could use a lighter process
+- Draft PR analysis mapping to the Ask pattern
+- Actionable recommendations based on team patterns
+- Full PR list with classification reasoning
 
 ## Automation
 
