@@ -178,7 +178,9 @@ Reports are saved to `~/eng-team-reporter/` by default (override with `--output-
 ### Main Team Report
 - Summary cards: JIRA issues, GitHub PRs/commits/reviews, Confluence pages
 - JIRA metrics by type and priority
+- JIRA issues and PRs grouped by epic with collapsible detail tables — summary row shows epic name, item count, and status chips; click to expand full detail
 - GitHub PRs with JIRA reference badges (blue = linked, yellow = missing)
+- Confluence page lists in collapsible sections to keep the report scannable
 - Per-person summary cards with click-through detail links
 
 ### Individual Detail Reports
